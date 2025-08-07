@@ -1,7 +1,7 @@
 from PIL import Image
 
 image = Image.open("./img.png").convert("RGB")
-image = image.crop((0, 0, input("Width: "), input("Height: ")))  # Ensure it's 320x240
+image = image.crop((0, 0, 320, 240))  # Ensure it's 320x240
 
 pixels = image.load()
 
