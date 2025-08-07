@@ -12,4 +12,5 @@ for y in range(240):
         r, g, b = pixels[x, y]
         output.append(f"0x{r:02X}{g:02X}{b:02X}")
 
-print(','.join(output))
+with open("img.txt", "w") as f:
+    f.write(','.join(output))
