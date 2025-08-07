@@ -1,7 +1,7 @@
 from PIL import Image
 
 image = Image.open("img.png").convert("RGB")
-image = image.resize((0, 0, 320, 240))
+image = image.crop((0, 0, 320, 240))
 pixels = image.load()
 
 output = []
@@ -11,9 +11,9 @@ for y in range(240):
         r, g, b = pixels[x, y]
 
         # Convert to RGB565
-        r5 = r >> 3
-        g6 = g >> 2
-        b5 = b >> 3
+        r5 = r >> 5
+        g6 = g >> 6
+        b5 = b >> 5
 
         color = (r5 << 11) | (g6 << 5) | b5
 
