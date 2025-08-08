@@ -1,10 +1,8 @@
 from PIL import Image
 
 image = Image.open("img.png").convert("RGB")
-image = image.resize((320, 240))
+image = image.resize((640, 480))
 pixels = image.load()
-
-output = []
 
 def rgb888_to_rgb565(red8, green8, blue8):
     # Convert 8-bit red to 5-bit red.
@@ -25,11 +23,15 @@ def rgb888_to_rgb565(red8, green8, blue8):
     return rgb565
 
 
-for y in range(240):
-    for x in range(320):
+output = []
+for y in range(480):
+    for x in range(640):
         r, g, b = pixels[x, y]
-
         output.append(f"0x{rgb888_to_rgb565(r, g, b):04X}")
 
+
+output.append("0xAAAA")
+print("Total entries:", len(output))
+assert len(output) == (640*480 + 1)
 with open("img.txt", "w") as f:
     f.write(",".join(output))
