@@ -1,19 +1,19 @@
 from PIL import Image
 
 image = Image.open("img.png").convert("RGB")
-image = image.crop((0, 0, 320, 240))
+image = image.resize((640, 480))
 pixels = image.load()
 
 output = []
 
-for y in range(240):
-    for x in range(320):
+for y in range(480):
+    for x in range(640):
         r, g, b = pixels[x, y]
 
         # Convert to RGB565
-        r5 = r >> 5
-        g6 = g >> 6
-        b5 = b >> 5
+        r5 = (r >> 3) & 0x1F
+        g6 = (g >> 2) & 0x3F
+        b5 = (b >> 3) & 0x1F
 
         color = (r5 << 11) | (g6 << 5) | b5
 
